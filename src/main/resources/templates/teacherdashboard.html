@@ -144,7 +144,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="deadline" class="form-label">Deadline</label>
-                        <input type="datetime-local" class="form-control" id="deadline" name="deadline" required>
+                        <input type="datetime-local" class="form-control" id="deadline" th:min="${localmindate}" th:max="${localmaxdate}" name="deadline" required>
                     </div>
                     <div class="mb-3">
                         <label for="student" class="form-label">Select Student(s)</label>

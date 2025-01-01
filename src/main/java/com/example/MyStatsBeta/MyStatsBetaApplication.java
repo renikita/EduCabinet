@@ -29,45 +29,55 @@ public class MyStatsBetaApplication {
     }
 
     //if Data in DB will be uncreated or void, uncomment this function
-//    @Bean
-//    public CommandLineRunner demoData(TeacherRepository teacherRepository, StudentRepository studentRepository, HomeworkRepository homeworkRepository, StudentResponseRepository studentResponseRepository, HomeworkService homeworkService) {
-//        return args -> {
-//
-//            Teacher teacher = new Teacher();
-//            teacher.setLogin("T");
-//            teacher.setName("Danilov");
-//            teacher.setPassword("tpass");
-//            teacher.setRole(User.Role.TEACHER);
-//            teacher.setStatus(User.Status.ACTIVATED);
-//            teacher.setTask(" ");
-//
-//            teacherRepository.save(teacher);
-//
-//            Student student = new Student();
-//            student.setLogin("S");
-//            student.setName("Gasarov");
-//            student.setPassword("spass");
-//            student.setRole(User.Role.STUDENT);
-//            student.setStatus(User.Status.ACTIVATED);
-//            student.setTeacher(teacher);
-//            studentRepository.save(student);
-//
-//            Student student1 = new Student();
-//            student1.setLogin("S1");
-//            student1.setName("Lopez");
-//            student1.setPassword("spass");
-//            student1.setRole(User.Role.STUDENT);
-//            student1.setStatus(User.Status.ACTIVATED);
-//            student1.setTeacher(teacher);
-//            studentRepository.save(student1);
-//
-//            teacher.getStudents().add(student);
-//            teacher.getStudents().add(student1);
-//            teacherRepository.save(teacher);
-//            List<Student> students = studentRepository.findAll();
-//
-//
-//            LocalDateTime uploadTime = LocalDateTime.of(2024, 10, 23, 10, 30);
+    @Bean
+    public CommandLineRunner demoData(TeacherRepository teacherRepository, StudentRepository studentRepository, HomeworkRepository homeworkRepository, StudentResponseRepository studentResponseRepository, HomeworkService homeworkService) {
+        return args -> {
+
+            Teacher teacher = new Teacher();
+            teacher.setLogin("T");
+            teacher.setName("Danilov");
+            teacher.setPassword("tpass");
+            teacher.setRole(User.Role.TEACHER);
+            teacher.setStatus(User.Status.ACTIVATED);
+            teacher.setTask(" ");
+
+            teacherRepository.save(teacher);
+
+            Student student = new Student();
+            student.setLogin("S");
+            student.setName("Gasarov");
+            student.setPassword("spass");
+            student.setRole(User.Role.STUDENT);
+            student.setStatus(User.Status.ACTIVATED);
+            student.setTeacher(teacher);
+            studentRepository.save(student);
+
+            Student student1 = new Student();
+            student1.setLogin("S1");
+            student1.setName("Lopez");
+            student1.setPassword("spass");
+            student1.setRole(User.Role.STUDENT);
+            student1.setStatus(User.Status.ACTIVATED);
+            student1.setTeacher(teacher);
+            studentRepository.save(student1);
+
+            Student student2 = new Student();
+            student2.setLogin("pavlyk0783");
+            student2.setName("Evgenia");
+            student2.setPassword("qwer1234");
+            student2.setRole(User.Role.STUDENT);
+            student2.setStatus(User.Status.ACTIVATED);
+            student2.setTeacher(teacher);
+            studentRepository.save(student2);
+
+            teacher.getStudents().add(student);
+            teacher.getStudents().add(student1);
+            teacher.getStudents().add(student2);
+            teacherRepository.save(teacher);
+            //List<Student> students = studentRepository.findAll();
+
+
+//            LocalDateTime uploadTime = LocalDateTime.of(2025, 10, 23, 10, 30);
 //            Homework homework = new Homework();
 //            homework.setNameHomework("Java Utilities");
 //            homework.setTask("Working with Java, Add new method");
@@ -80,7 +90,7 @@ public class MyStatsBetaApplication {
 //            homework.setTeacher(teacher);
 //            homework.setStudents(students);
 //            homeworkRepository.save(homework);
-//
+
 //            StudentResponse studentResponse  = new StudentResponse();
 //            studentResponse.setStudent(student);
 //            studentResponse.setResponseText(null);
@@ -88,8 +98,8 @@ public class MyStatsBetaApplication {
 //            studentResponse.setResponseTime(null);
 //            studentResponse.setHomework(homework);
 //            studentResponseRepository.save(studentResponse);
-//
-//
+
+
 //            StudentResponse studentResponse1  = new StudentResponse();
 //            studentResponse1.setStudent(student1);
 //            studentResponse1.setResponseText(null);
@@ -97,17 +107,17 @@ public class MyStatsBetaApplication {
 //            studentResponse1.setResponseTime(null);
 //            studentResponse1.setHomework(homework);
 //            studentResponseRepository.save(studentResponse1);
-//
-//
-//
-//            LocalDateTime uploadTime1 = LocalDateTime.of(2024, 1, 23, 10, 30);
+
+
+
+//            LocalDateTime uploadTime1 = LocalDateTime.of(2025, 1, 23, 10, 30);
 //            Homework homework1 = new Homework();
 //            homework1.setNameHomework("Java Utilities");
 //            homework1.setTask("Working with Java, Add new attribute");
 //            homework1.setDescription("Develop a Java program for working with various utilities. The main goal of this task is to expand the functionality of existing utilities by adding a new attribute that will allow storing additional data for processing." +
 //                    " The new attribute can be used to implement various operations or to store additional information about the data.\n" +
 //                    "The task also includes writing the necessary tests to verify the correct operation of the new attribute and ensure compliance with the specification requirements.");
-//
+
 //            homework1.setUploadTime(uploadTime1);
 //            uploadTime1 = LocalDateTime.of(2024, 2, 23, 10, 30);
 //            homework1.setDeadline(uploadTime1);
@@ -115,7 +125,7 @@ public class MyStatsBetaApplication {
 //            homework1.setStudents(students);
 //
 //            homeworkRepository.save(homework1);
-//
+
 //            StudentResponse studentResponse2  = new StudentResponse();
 //            studentResponse2.setStudent(student);
 //            studentResponse2.setResponseText(null);
@@ -123,7 +133,7 @@ public class MyStatsBetaApplication {
 //            studentResponse2.setResponseTime(null);
 //            studentResponse2.setHomework(homework1);
 //            studentResponseRepository.save(studentResponse2);
-//
+
 //            StudentResponse studentResponse3  = new StudentResponse();
 //            studentResponse3.setStudent(student1);
 //            studentResponse3.setResponseText(null);
@@ -131,7 +141,7 @@ public class MyStatsBetaApplication {
 //            studentResponse3.setResponseTime(null);
 //            studentResponse3.setHomework(homework1);
 //            studentResponseRepository.save(studentResponse3);
-//
+
 //            List<Homework> homeworkList = homeworkRepository.findAll();
 //
 //            student.setHomeworks(homeworkList);
@@ -157,8 +167,8 @@ public class MyStatsBetaApplication {
 //                studentResponseRepository.save(response);
 //                System.out.println(response);
 //            });
-//
-//        };
-//    }
+
+        };
+    }
 
 }

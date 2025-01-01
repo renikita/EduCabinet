@@ -21,7 +21,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.ejb.Local;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -84,7 +86,20 @@ public class TeacherController {
 
         List<Student> students = studentRepository.findAll();
 
+        // обмеження терміну
+        LocalDateTime MinTerminTime = LocalDateTime.now();
+        MinTerminTime = MinTerminTime.plusHours(2);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        String formattedDateTime = MinTerminTime.format(formatter);
+
+        model.addAttribute("localmindate", formattedDateTime);
+        LocalDateTime MaxTerminTime = LocalDateTime.now();
+        MaxTerminTime = MaxTerminTime.plusMonths(12);
+        formattedDateTime = MaxTerminTime.format(formatter);
+        model.addAttribute("localmaxdate", formattedDateTime);
         if (localStudentName != null) {
+
+
 
 
             if (localStudentName.equals("All")) {
