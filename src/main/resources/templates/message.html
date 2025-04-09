@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:style="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>]Messages</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .expand-textarea {
+            width: 100%;
+            /*padding: 10px;*/
+            border: 1px solid #ccc;
+            border-radius: 5px;
+
+            margin-top: 10px;
+
+            min-height: 100px;
+            max-height: 280px;
+            max-width: 1150px;
+            overflow-y: auto;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        header h6 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .button {
+            padding: 10px 20px;
+
+            border-radius: 5px;
+            border: 1px solid #6d6d6d;
+            cursor: pointer;
+            font-weight: bold;
+            width: 150px;
+            text-align: center;
+            background-color: #a0d914;
+
+        }
+
+        .btn-upld{
+            margin-top: 5px;
+            color: #004704;
+            width: 150px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .button-current {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .button-on-check {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        .button-penal {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .button-completed {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .button-disabled {
+            cursor: not-allowed;
+            opacity: 1;
+        }
+
+        .button:hover:not(.button-disabled) {
+            opacity: 0.7;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: vertical;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/api/students/mystats">Student homework</a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link disabled" aria-disabled="true">Settings</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" aria-disabled="true">Messages</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="/login">Logout</a>
+        </li>
+    </ul>
+    <header>
+        <h6>Hello, <span th:text="${name}"></span>!</h6>
+
+    </header>
+    <br>
+
+</div>
+<div class="container">
+    <div class="row">
+
+        <div class="col-md-3">
+            <nav class="nav flex-column">
+                <a class="p-3 bg-success bg-opacity-10 border border-success border-start-0 rounded-end nav-link" style="max-width: 250px;" href="#">
+                    Teacher: Danilov
+                </a>
+                <a class="p-3 bg-light bg-opacity-10 rounded-end nav-link disabled" aria-disabled="true" style="max-width: 250px;" href="#">
+                    Teacher: Other Teacher
+                </a>
+                <a class="p-3 bg-light bg-opacity-10 rounded-end nav-link disabled" aria-disabled="true" style="max-width: 250px;" href="#">
+                    Teacher: -
+                </a>
+            </nav>
+        </div>
+
+
+        <div class="col-md-9">
+            <div class="card">
+<!--                th:if="${response.messages == null}"-->
+                <div class="card-body bg-info bg-opacity-10" >
+                    <h5 class="card-title">Messages</h5>
+                    <p class="card-text">This is where the messages will be displayed.</p>
+                    <div class="card-body bg-light bg-opacity-10">
+                        <div id="messagesContainer" class="mb-3" th:each="response : ${responseList}">
+
+                </div>
+            </div>
+            <div class="mt-4">
+                <form id="messageForm" onsubmit="handleMessageSubmit(event)">
+                    <textarea class="expand-textarea" id="messageContent" placeholder="Type your message here..."></textarea>
+                    <button type="submit" class="btn btn-primary mt-2">Send Message</button>
+                </form>
+
+        </div>
+    </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-7+9z8e1" crossorigin="anonymous"></script>
+</body>
+</html>

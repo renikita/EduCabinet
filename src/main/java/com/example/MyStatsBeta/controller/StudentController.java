@@ -60,6 +60,9 @@ public class StudentController {
 
     @GetMapping("/mystats")
     public String showMyStatsPage(Model model, HttpServletRequest request) {
+
+        //check id over sout
+        System.out.println("Console: Listening mystats...\n" + request.getSession().getId());
         HttpSession session = request.getSession();
         String role = (String) session.getAttribute("role");
         LocalDateTime uploadtime = LocalDateTime.now();

@@ -1,10 +1,10 @@
 package com.example.MyStatsBeta.controller;
 
-import com.example.MyStatsBeta.model.Student;
-import com.example.MyStatsBeta.model.Teacher;
-import com.example.MyStatsBeta.repository.AuthenticationService;
-import com.example.MyStatsBeta.repository.StudentRepository;
-import com.example.MyStatsBeta.repository.TeacherRepository;
+
+import com.example.MyStatsBeta.modelparent.User;
+import com.example.MyStatsBeta.repository.UserRepository;
+import com.example.MyStatsBeta.service.AuthenticationService;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +20,13 @@ import java.util.Map;
 @Controller
 public class AuthController {
 
-    private final TeacherRepository teacherRepository;
-    private final StudentRepository studentRepository;
 
+    private final UserRepository userRepository;
     @Autowired
     private AuthenticationService authenticationService;
 
-    public AuthController(TeacherRepository teacherRepository, StudentRepository studentRepository) {
-        this.teacherRepository = teacherRepository;
-        this.studentRepository = studentRepository;
+    public AuthController(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
 
@@ -44,19 +42,21 @@ public class AuthController {
         if (authenticationService.authenticate(login, password)) {
             HttpSession session = request.getSession();
             System.out.println(session.toString());
-            Teacher teacher = teacherRepository.findByLogin(login);
-            Student student = studentRepository.findByLogin(login);
-            if (teacher != null) {
-                session.setAttribute("role", "TEACHER");
-                session.setAttribute("userId", teacher.getId());
-                response.put("role", "TEACHER");
-                response.put("userId", String.valueOf(teacher.getId()));
-            } else if (student != null) {
 
+            User user = userRepository.findByLogin(login);
+            if (user != null && user.getRole() == User.Role.TEACHER) {
+                session.setAttribute("role", "TEACHER");
+                session.setAttribute("userId", user.getId());
+                response.put("role", "TEACHER");
+                response.put("userId", String.valueOf(user.getId()));
+                System.out.println("Teacher logged in: ");
+                System.out.println(user.getId());
+            } else if (user != null && user.getRole() == User.Role.STUDENT) {
                 session.setAttribute("role", "STUDENT");
-                session.setAttribute("userId", student.getId());
+                session.setAttribute("userId", user.getId());
                 response.put("role", "STUDENT");
-                response.put("userId", String.valueOf(student.getId()));
+                response.put("userId", String.valueOf(user.getId()));
+                System.out.println("Student logged in: " + user.getId());
             }
         } else {
             response.put("error", "Incorrect username or password.");

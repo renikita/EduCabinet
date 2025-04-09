@@ -12,14 +12,10 @@ import java.util.List;
 @Setter
 @Getter
 @ToString
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode
 @Entity
 @Table(name = "teachers")
 public class Teacher extends User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String Task;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "teacher")

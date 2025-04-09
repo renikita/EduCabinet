@@ -21,10 +21,7 @@ public class Student extends User {
 
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String homework;
+
     private LocalDateTime uploadTime;
 
     @ToString.Exclude

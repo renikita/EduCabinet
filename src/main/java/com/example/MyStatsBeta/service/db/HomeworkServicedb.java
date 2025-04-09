@@ -21,9 +21,8 @@ public class HomeworkServicedb implements HomeworkService {
         return homeworkRepository.save(homework);
     }
     @Override
-    public Homework findById(Integer id){
-        return homeworkRepository.findById(id).get();
-    }
+    public Homework findById(Integer id){return homeworkRepository.findById(id).get();}
+    //homeworkRepository.findById(id).orElseTrow() - > new HomeworkNotFoundException(id); - реліз
 
     @Override
     public List<Homework> findAll() {
