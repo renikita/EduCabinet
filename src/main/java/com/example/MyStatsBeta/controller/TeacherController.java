@@ -80,10 +80,12 @@ public class TeacherController {
 
         List<Homework> homeworkList = homeworkRepository.findAll();
         Integer userId = (Integer) session.getAttribute("userId");
-
+        if (role == null || userId == null) {
+            return "redirect:/login";
+        }
         Teacher teacher = teacherRepository.findById(userId).orElse(null);
         model.addAttribute("name", teacher != null ? teacher.getName() : null);
-
+        model.addAttribute("settings", teacher.getSettings());
         List<Student> students = studentRepository.findAll();
 
         // обмеження терміну

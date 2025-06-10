@@ -54,15 +54,7 @@ public class StudentController {
         this.teacherRepository = teacherRepository;
     }
 
-    @GetMapping("/settings")
-    public String showMySettingsPage(Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        String role = (String) session.getAttribute("role");
 
-        Integer userId = (Integer) session.getAttribute("userId");
-
-        return "settings";
-    }
 
     @GetMapping("/mystats")
     public String showMyStatsPage(Model model, HttpServletRequest request) {
@@ -76,8 +68,11 @@ public class StudentController {
         Integer userId = (Integer) session.getAttribute("userId");
 
         Student student = studentRepository.findById(userId).orElse(null);
+        if (student == null) {
+            return "redirect:/login";
+        }
 
-
+        model.addAttribute("settings", student.getSettings());
         model.addAttribute("name", student != null ? student.getName() : null);
 
 

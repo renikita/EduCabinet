@@ -68,6 +68,18 @@ public class UserServivedb implements UserService {
     }
 
     @Override
+    public User changeEmail(String emailBefore, String emailAfter) {
+        String email = userRepository.findByLogin(emailBefore).getEmail();
+        if (email != null) {
+            User user = userRepository.findByLogin(emailBefore);
+            user.setEmail(emailAfter);
+            return userRepository.save(user);
+        } else {
+            throw new RuntimeException("emailBefore must have a value");
+        }
+    }
+
+    @Override
     public User changePassword(String passwordBefore, String passwordAfter) {
         String password = userRepository.findByLogin(passwordBefore).getPassword();
         if (password != null) {
