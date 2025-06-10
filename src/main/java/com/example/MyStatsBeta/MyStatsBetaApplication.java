@@ -10,6 +10,7 @@ import com.example.MyStatsBeta.repository.StudentRepository;
 import com.example.MyStatsBeta.repository.StudentResponseRepository;
 import com.example.MyStatsBeta.repository.TeacherRepository;
 import com.example.MyStatsBeta.service.HomeworkService;
+import com.example.MyStatsBeta.service.SettingsService;
 import com.example.MyStatsBeta.service.StudentService;
 import com.example.MyStatsBeta.model.StudentResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,7 +31,7 @@ public class MyStatsBetaApplication {
 
     //if Data in DB will be uncreated or void, uncomment this function
     @Bean
-    public CommandLineRunner demoData(TeacherRepository teacherRepository, StudentRepository studentRepository, HomeworkRepository homeworkRepository, StudentResponseRepository studentResponseRepository, HomeworkService homeworkService) {
+    public CommandLineRunner demoData(TeacherRepository teacherRepository, StudentRepository studentRepository, HomeworkRepository homeworkRepository, StudentResponseRepository studentResponseRepository, HomeworkService homeworkService, SettingsService settingsService) {
         return args -> {
 
             Teacher teacher = new Teacher();
@@ -40,8 +41,8 @@ public class MyStatsBetaApplication {
             teacher.setRole(User.Role.TEACHER);
             teacher.setStatus(User.Status.ACTIVATED);
 
-
             teacherRepository.save(teacher);
+            settingsService.setDefaultSettings(teacher.getId());
 
             Student student = new Student();
             student.setLogin("S");
@@ -51,6 +52,8 @@ public class MyStatsBetaApplication {
             student.setStatus(User.Status.ACTIVATED);
             student.setTeacher(teacher);
             studentRepository.save(student);
+            settingsService.setDefaultSettings(student.getId());
+
 
             Student student1 = new Student();
             student1.setLogin("S1");
@@ -60,6 +63,7 @@ public class MyStatsBetaApplication {
             student1.setStatus(User.Status.ACTIVATED);
             student1.setTeacher(teacher);
             studentRepository.save(student1);
+            settingsService.setDefaultSettings(student1.getId());
 
             Student student2 = new Student();
             student2.setLogin("pavlyk0783");
@@ -69,12 +73,14 @@ public class MyStatsBetaApplication {
             student2.setStatus(User.Status.ACTIVATED);
             student2.setTeacher(teacher);
             studentRepository.save(student2);
+            settingsService.setDefaultSettings(student2.getId());
 
             teacher.getStudents().add(student);
             teacher.getStudents().add(student1);
             teacher.getStudents().add(student2);
             teacherRepository.save(teacher);
             List<Student> students = studentRepository.findAll();
+
 
 
             LocalDateTime uploadTime = LocalDateTime.of(2025, 06, 10, 10, 30);

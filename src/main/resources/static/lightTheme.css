@@ -1,0 +1,135 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+
+}
+
+
+header {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    padding: 15px 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+
+}
+
+header h6 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background: linear-gradient(to bottom, #ffffff, #f0f0f0);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: vertical;
+    margin-top: 10px;
+    background-color: #f9f9f9;
+}
+
+.expand-textarea {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+    min-height: 100px;
+    max-height: 280px;
+    max-width: 1150px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+}
+
+.button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #6d6d6d;
+    cursor: pointer;
+    font-weight: bold;
+    width: 150px;
+    text-align: center;
+    background-color: #e0e0e0;
+    color: #333;
+}
+
+.button:hover:not(.button-disabled) {
+    opacity: 0.8;
+}
+
+.button-current {
+    background-color: #28a745;
+    color: white;
+}
+
+.button-on-check {
+    background-color: #ffc107;
+    color: black;
+}
+
+.button-penal {
+    background-color: #dc3545;
+    color: white;
+}
+
+.button-completed {
+    background-color: #007bff;
+    color: white;
+}
+
+.button-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.btn-upld {
+    margin-top: 5px;
+    color: #004704;
+    width: 150px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.due-date {
+    font-size: 14px;
+    color: #555;
+}
+
+.homework-text {
+    font-size: 16px;
+    color: #333;
+}
+
+.submission-deadline {
+    font-size: 14px;
+    color: #555;
+}

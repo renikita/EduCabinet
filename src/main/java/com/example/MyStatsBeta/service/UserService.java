@@ -15,6 +15,7 @@ public interface UserService {
     User findByName(String name);
     User changeName(String nameBefore, String nameAfter);
     User changeLogin(String loginBefore, String loginAfter);
+    User changeEmail(String emailBefore, String emailAfter);
     User changePassword(String passwordBefore, String passwordAfter);
     List<User> findByRole(User.Role role);
     List<User> findAll();

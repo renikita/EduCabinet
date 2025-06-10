@@ -49,7 +49,7 @@ public class MessageController {
             return "redirect:/login";
         }
         model.addAttribute("role", role);
-
+        model.addAttribute("settings", userService.findById(userId).get().getSettings());
         if( role.equals("STUDENT")) {
             studentRepository.findById(userId).ifPresent(student -> model.addAttribute("senderName", student.getName()));
             List<User> teachers = userRepository.findByRole(User.Role.TEACHER);
@@ -104,7 +104,7 @@ public class MessageController {
     public String getMessages(@PathVariable Integer receiverId, Model model, HttpSession session) {
         String role = (String) session.getAttribute("role");
         Integer userId = (Integer) session.getAttribute("userId");
-
+        model.addAttribute("settings", userService.findById(userId).get().getSettings());
         if (role == null || userId == null) {
             return "redirect:/login";
         }

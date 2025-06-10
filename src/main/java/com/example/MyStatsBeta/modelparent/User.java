@@ -1,5 +1,6 @@
 package com.example.MyStatsBeta.modelparent;
 
+import com.example.MyStatsBeta.model.Settings;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,8 +31,12 @@ public class User {
     private String login;
     private String name;
     private String password;
+    private String email;
     private Role role;
     private Status status;
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Settings settings;
+
 
 
 }
