@@ -77,7 +77,7 @@ public class MyStatsBetaApplication {
             List<Student> students = studentRepository.findAll();
 
 
-            LocalDateTime uploadTime = LocalDateTime.of(2025, 10, 23, 10, 30);
+            LocalDateTime uploadTime = LocalDateTime.of(2025, 06, 10, 10, 30);
             Homework homework = new Homework();
             homework.setNameHomework("Java Utilities");
             homework.setTask("Working with Java, Add new method");
@@ -85,7 +85,7 @@ public class MyStatsBetaApplication {
                     " The new method must be designed to process text data and must perform some functionality, such as encryption, filtering, or transformation.\n" +
                     "The task also includes writing the necessary tests to verify the correct operation of the new method and ensure compliance with the specification requirements.");
             homework.setUploadTime(uploadTime);
-            uploadTime = LocalDateTime.of(2024, 3, 23, 10, 30);
+            uploadTime = LocalDateTime.of(2026, 3, 23, 10, 30);
             homework.setDeadline(uploadTime);
             homework.setTeacher(teacher);
             homework.setStudents(students);
@@ -119,7 +119,7 @@ public class MyStatsBetaApplication {
                     "The task also includes writing the necessary tests to verify the correct operation of the new attribute and ensure compliance with the specification requirements.");
 
             homework1.setUploadTime(uploadTime1);
-            uploadTime1 = LocalDateTime.of(2024, 2, 23, 10, 30);
+            uploadTime1 = LocalDateTime.of(2026, 2, 23, 10, 30);
             homework1.setDeadline(uploadTime1);
             homework1.setTeacher(teacher);
             homework1.setStudents(students);

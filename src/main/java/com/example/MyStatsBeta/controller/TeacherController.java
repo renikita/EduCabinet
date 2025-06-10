@@ -57,7 +57,7 @@ public class TeacherController {
     @GetMapping("/teacherdashboard/{studentName}")
     public String getStudentName(@PathVariable String studentName, Model model) {
 
-        System.out.println("getStudentName is Loaded!");
+
         localStudentName = studentName;
 
 
@@ -114,7 +114,7 @@ public class TeacherController {
 
                 return "teacherdashboard";
             }
-            System.out.println(localStudentName);
+
 
             Student student;
             List<StudentResponse> responses = studentResponseRepository.findAllResponsesByStudent(student = studentRepository.findByName(localStudentName));
@@ -125,7 +125,7 @@ public class TeacherController {
 
         }
 
-        System.out.println(homeworkList);
+
         model.addAttribute("homeworkList", homeworkList);
         model.addAttribute("students", students);
 
@@ -169,7 +169,7 @@ public class TeacherController {
 
         homeworkRepository.save(createHomework);
 
-        System.out.println("studentList - :");
+
 
 
         for (int i = 0; i < studentList.size(); i++) {
@@ -180,10 +180,9 @@ public class TeacherController {
                 createNewResponse.setStudent(student);
                 createNewResponse.setHomework(createHomework);
                 studentResponseRepository.save(createNewResponse);
-                System.out.println(student);
+
             }
         }
-        System.out.println(studentList);
         StudentResponse createNewResponse = new StudentResponse();
 
 
@@ -200,7 +199,7 @@ public class TeacherController {
                 response.setHomeworkStatus(HomeworkStatus.CURRENT);
             }
             studentResponseRepository.save(response);
-            System.out.println(response);
+
         });
 
 
@@ -242,7 +241,7 @@ public class TeacherController {
         response.setHomeworkStatus(HomeworkStatus.COMPLETED);
         studentResponseRepository.save(response);
 
-        // System.out.println("/UPLOAD: \n\n" + homework);
+
         return "redirect:/api/teachers/teacherdashboard";
     }
 }

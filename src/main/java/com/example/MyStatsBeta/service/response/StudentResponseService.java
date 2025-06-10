@@ -17,7 +17,6 @@ public interface StudentResponseService {
     List<StudentResponse> findAllResponsesByStudent(Student student);
 
     StudentResponse findByStudentAndHomework(Student student, Homework homework);
-
     StudentResponse findByStudent(Student student);
     StudentResponse findByHomework(Homework homework);
 

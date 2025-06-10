@@ -118,6 +118,8 @@
             resize: vertical;
             margin-top: 10px;
         }
+
+
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
@@ -125,7 +127,7 @@
 <div class="container"  >
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Student homework</a>
+            <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
         </li>
 
         <li class="nav-item">
@@ -170,14 +172,27 @@
     <br>
     <hr>
     <p class="submission-deadline" th:text="'Submission Deadline: ' + ${#temporals.format(response.getHomework().deadline, 'dd/MM/yyyy HH:mm')}"></p>
-    <form action="/api/students/upload" method="post" th:if="${response.getResponseText() == null && response.getMark() == null}">
+    <form action="/api/students/upload" method="post" enctype="multipart/form-data" th:if="${response.getResponseText() == null && response.getMark() == null}">
         <input type="hidden" name="homeworkId" th:value="${response.getHomework().id}" />
         <textarea name="homeworkText" class="expand-textarea" rows="5" cols="30" placeholder="Enter your homework here"></textarea>
+
+        <div class="mb-3" th:if="${response.getResponseFile() == null}">
+            <label for="formFile" class="form-label">Додати файли: </label>
+            <input class="form-control" type="file" id="formFile" name="responseFile">
+        </div>
         <br>
-        <button type="submit" class="btn btn-success" >Upload Homework</button>
+        <button type="submit" class="btn btn-success">Upload Homework</button>
     </form>
     <form th:if="${response.getResponseText() != null}">
         <p th:text="'Your answer: ' + ${response.getResponseText()}"></p>
+        <div th:if="${response.getResponseFile() != null}">
+            <p>Attached File:</p>
+            <ul class="list-group">
+                <li class="list-group-item list-group-item-secondary">
+                    <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" th:href="@{'/api/students/download/' + ${response.id}}" target="_blank" th:text="'Download file: ' + ${response.getFileName()}"></a>
+                </li>
+            </ul>
+        </div>
     </form>
     <hr>
     <p th:if="${response.getMark() != null}" th:text="${'Mark is: ' + response.getMark()}">Your mark is: </p>

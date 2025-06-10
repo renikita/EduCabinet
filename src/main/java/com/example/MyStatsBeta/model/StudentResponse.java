@@ -44,5 +44,11 @@ public class StudentResponse {
     @Enumerated(EnumType.STRING)
     private HomeworkStatus homeworkStatus;
 
+    private String fileName;
+    private String fileType;
+
+    @Lob
+    private byte[] responseFile;
+
 }
 
