@@ -15,11 +15,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.ContentDisposition;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.ejb.Local;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -49,13 +55,13 @@ public class StudentController {
     }
 
     @GetMapping("/settings")
-    public String showMySettingsPage(Model model, HttpServletRequest request){
-     HttpSession session = request.getSession();
-     String role = (String) session.getAttribute("role");
+    public String showMySettingsPage(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String role = (String) session.getAttribute("role");
 
-     Integer userId = (Integer) session.getAttribute("userId");
+        Integer userId = (Integer) session.getAttribute("userId");
 
-     return "settings";
+        return "settings";
     }
 
     @GetMapping("/mystats")
@@ -72,9 +78,9 @@ public class StudentController {
         Student student = studentRepository.findById(userId).orElse(null);
 
 
-
-
         model.addAttribute("name", student != null ? student.getName() : null);
+
+
 
         Teacher teacher = student != null ? student.getTeacher() : null;
         model.addAttribute("teachername", teacher != null ? teacher.getName() : null);
@@ -112,31 +118,63 @@ public class StudentController {
     }
 
 
-
     @PostMapping("/upload")
     public String uploadHomework(@RequestParam("homeworkText") String homeworkText,
                                  @RequestParam("homeworkId") Integer homeworkId,
+                                 @RequestParam("responseFile") MultipartFile responseFile,
                                  HttpServletRequest request) {
         HttpSession session = request.getSession();
         Integer userId = (Integer) session.getAttribute("userId");
         Student student = studentRepository.findById(userId).orElse(null);
         Homework homework = homeworkRepository.findById(homeworkId).orElse(null);
+
         if (student != null && homework != null) {
             LocalDateTime uploadTime = LocalDateTime.now();
             StudentResponse response = studentResponseRepository.findByStudentAndHomework(student, homework);
             response.setResponseTime(uploadTime);
             response.setResponseText(homeworkText);
             response.setHomeworkStatus(HomeworkStatus.ON_CHECK);
+
+            try {
+                if (!responseFile.isEmpty()) {
+                    response.setFileName(responseFile.getOriginalFilename());
+                    response.setFileType(responseFile.getContentType());
+                    response.setResponseFile(responseFile.getBytes());
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                return "redirect:/error";
+            }
+
             studentResponseRepository.save(response);
-
-
-
-           // System.out.println("/UPLOAD: \n\n" + homework);
         }
-            return "redirect:/api/students/mystats";
-        }
+
+        return "redirect:/api/students/mystats";
     }
 
+    @GetMapping("/download/{responseId}")
+    public ResponseEntity<byte[]> downloadFile(@PathVariable("responseId") Integer responseId, HttpSession session) {
+        StudentResponse response = studentResponseRepository.findById(responseId)
+                .orElseThrow(() -> new RuntimeException("Response not found"));
+        //is it teacher and student?
+        String role = (String) session.getAttribute("role");
+        if (role == null || (!role.equals("STUDENT") && !role.equals("TEACHER"))) {
+            return ResponseEntity.status(403).build(); // Forbidden
+        }
+        byte[] fileBytes = response.getResponseFile();
+        if (fileBytes == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.parseMediaType(response.getFileType()));
+        headers.setContentDisposition(ContentDisposition.attachment().filename(response.getFileName()).build());
+
+        return ResponseEntity.ok()
+                .headers(headers)
+                .body(fileBytes);
+    }
+}
 
 
 

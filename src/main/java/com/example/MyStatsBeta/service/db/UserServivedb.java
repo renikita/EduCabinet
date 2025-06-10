@@ -79,6 +79,11 @@ public class UserServivedb implements UserService {
         }
     }
 
+    @Override
+    public List<User> findByRole(User.Role role) {
+        return userRepository.findByRole(role);
+    }
+
 
     @Override
     public List<User> findAll() {

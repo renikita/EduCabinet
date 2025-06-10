@@ -196,13 +196,16 @@
 
     <ul class="nav nav-tabs">
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Teacher homework</a>
+            <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
         </li>
 
         <li class="nav-item">
             <a class="nav-link disabled" href="#">Settings</a>
         </li>
         <li class="nav-item">
+        <li class="nav-item">
+        <a class="nav-link" href="/message">Messages</a>
+         </li>
             <a class="nav-link disabled" aria-disabled="true">Create new account</a>
         </li>
         <li class="nav-item">
@@ -270,6 +273,15 @@
                         <p class="submission-deadline" th:text="'Submission Deadline: ' + ${#temporals.format(response.getHomework().getDeadline(), 'dd/MM/yyyy HH:mm')}"></p>
                         <form th:if="${response.getResponseText() != null}">
                             <p th:text="'Answer: ' + ${response.getResponseText()}"></p>
+                            <div th:if="${response.getResponseFile() != null}">
+                                <p>Attached File:</p>
+                                <ul class="list-group">
+                                    <li class="list-group-item list-group-item-secondary">
+                                        <a class="link-success link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover" th:href="@{'/api/students/download/' + ${response.id}}" target="_blank" th:text="'Download file: ' + ${response.getFileName()}"></a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <br>
                         </form>
                         <form action="/api/teachers/upload" method="post" th:if="${response.getMark() == null && response.getHomeworkStatus().toString() != 'CURRENT'}">
                             <input type="hidden" name="homeworkId" th:value="${response.getId()}" />
