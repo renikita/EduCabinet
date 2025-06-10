@@ -164,7 +164,7 @@
 
                     <div class="card" th:classappend="${message.sender.id == activeReceiverId} ? '' : 'bg-primary bg-opacity-10'" style="max-width: 70%;"> <div class="card-header">
                         <strong th:text="${message.sender.name}"></strong>
-                        <small th:text="${#temporals.format(message.timestamp, 'dd/MM/yyyh HH:mm')}"></small>
+                        <small th:text="${#temporals.format(message.timestamp, 'dd/MM/yyyy HH:mm')}"></small>
                     </div>
                         <div class="card-body bg-light">
                             <p class="card-text" th:text="${message.content}"></p>
