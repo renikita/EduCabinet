@@ -11,8 +11,8 @@
 	<groupId>com.example</groupId>
 	<artifactId>EduCabinet</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>MyStatsBeta</name>
-	<description>MyStatsBeta - Web-App Spring. Student can upload homework as text. The teacher can see all students, view Dz, and see download time. The student sees his Dz and can reload.</description>
+	<name>EduCabinet</name>
+	<description>EduCabinet - Web-App Spring. Student can upload homework as text. The teacher can see all students, view Dz, and see download time. The student sees his Dz and can reload.</description>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
