@@ -1,0 +1,148 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #121212;
+    color: #f5f5dc;
+}
+.row{
+    background-color: #121212;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #121212;
+}
+
+header {
+    background-color: #1a1a1a; /* Dark header */
+    color: #ffd700; /* Bright yellow text */
+    padding: 15px 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
+}
+
+header h6 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.card {
+    border: 1px solid #333; /* Dark border */
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background: linear-gradient(to bottom, #1a1a1a, #333); /* Gradient for depth */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+}
+
+.card-header {
+    background-color: #333; /* Dark gray header */
+    color: #ffd700; /* Yellow text */
+    padding: 10px;
+    border-bottom: 1px solid #444; /* Slightly lighter border */
+}
+
+.card-body {
+    padding: 20px;
+    color: #f5f5dc; /* Light yellow text */
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #444; /* Dark border */
+    border-radius: 5px;
+    resize: vertical;
+    margin-top: 10px;
+    background-color: #1a1a1a; /* Dark background */
+    color: #ffd700; /* Yellow text */
+}
+
+.expand-textarea {
+    width: 100%;
+    border: 1px solid #444;
+    border-radius: 5px;
+    margin-top: 10px;
+    min-height: 100px;
+    max-height: 280px;
+    max-width: 1150px;
+    overflow-y: auto;
+    background-color: #1a1a1a;
+    color: #ffd700;
+}
+.form-control{
+    color: #ffd700; /* Yellow text */
+    background-color: #1a1a1a;
+}
+
+.form-select{
+    color: #ffd700; /* Yellow text */
+    background-color: #1a1a1a;
+}
+.button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 1px solid #ffd700; /* Yellow border */
+    cursor: pointer;
+    font-weight: bold;
+    width: 150px;
+    text-align: center;
+    background-color: #333; /* Dark background */
+    color: #ffd700; /* Yellow text */
+}
+
+.button:hover:not(.button-disabled) {
+    background-color: #ffd700; /* Yellow hover */
+    color: #333; /* Dark text */
+}
+
+.button-current {
+    background-color: #28a745; /* Green for current */
+    color: white;
+}
+
+.button-on-check {
+    background-color: #ffc107; /* Yellow for on check */
+    color: black;
+}
+
+.button-penal {
+    background-color: #dc3545; /* Red for penal */
+    color: white;
+}
+
+.button-completed {
+    background-color: #007bff; /* Blue for completed */
+    color: white;
+}
+
+.button-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.btn-upld {
+    margin-top: 5px;
+    color: #ffd700; /* Yellow text */
+    width: 150px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+}
+
+.due-date {
+    font-size: 14px;
+    color: #ffd700; /* Yellow text */
+}
+
+.homework-text {
+    font-size: 16px;
+    color: #f5f5dc; /* Light yellow text */
+}
+
+.submission-deadline {
+    font-size: 14px;
+    color: #ffd700; /* Yellow text */
+}

@@ -1,0 +1,28 @@
+.auth-logo{
+    width: 200px;
+    height: 200px;
+}
+.auth-div{
+    background-color: rgb(255, 255, 255);
+    width: 400px !important; height:auto !important;
+    margin-top: 5%;
+
+}
+
+body {
+    background-color: #ebf5fb;
+}
+
+.login-input{
+    width: 250px;
+    margin-left: 15%;
+    margin-top: 10%;
+}
+
+
+
+.btn-login{
+    width: 250px;
+    margin-top: 5%;
+    margin-bottom: 10%;
+}
