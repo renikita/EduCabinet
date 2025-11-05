@@ -25,10 +25,11 @@ public class EduCabinetApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(EduCabinetApplication.class, args);
+
     }
 
     //if Data in DB will be uncreated or void, uncomment this function
-
+    @Bean
     public CommandLineRunner demoData(TeacherRepository teacherRepository, StudentRepository studentRepository, HomeworkRepository homeworkRepository, StudentResponseRepository studentResponseRepository, HomeworkService homeworkService, SettingsService settingsService) {
         return args -> {
 
@@ -163,6 +164,17 @@ public class EduCabinetApplication {
                 studentResponseRepository.save(response);
             });
 
+            System.out.println("\n\n------------------------------------------------------------\n" +
+                    "LOGIN DETAILS\n" +
+                    "------------------------------------------------------------\n" +
+                    "\n" +
+                    "Here are the credentials you can use to log into the EduCabinet demo version after starting the application:\n" +
+                    "\n" +
+                    "Login\t\t\t\tPassword\n" +
+                    "teacher_demo\t\tpassword123\n" +
+                    "student_demo1\t\tpassword123\n" +
+                    "student_demo2\t\tpassword123\n" +
+                    "student_demo3\t\tpassword123\n\n\n\n");
         };
     }
 
