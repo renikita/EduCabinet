@@ -1,0 +1,30 @@
+services:
+
+  db:
+    image: mariadb:latest
+    container_name: educabinet_db
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: educabinet_db
+      MARIADB_USER: educabinet_user
+      MARIADB_PASSWORD: educabinet_user
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+  app:
+    build: .
+    container_name: educabinet_app
+    restart: on-failure
+    ports:
+      - "8000:8000"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mariadb://db:3306/educabinet_db
+      SPRING_DATASOURCE_USERNAME: educabinet_user
+      SPRING_DATASOURCE_PASSWORD: educabinet_user
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    depends_on:
+      - db
+
+volumes:
+  mariadb_data:
